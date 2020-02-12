@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <con:config xmlns:con="http://www.sourceid.org/2004/05/config">
-    <con:map name="IdpAuthnAdapterInstances">
-        <con:item name="HTMLFormPD">com.pingidentity.adapters.htmlform.idp.HtmlFormIdpAuthnAdapter</con:item>
-    </con:map>
-    <con:map name="IdpAdapterInstanceParents"/>
+   <con:map name="IdpAuthnAdapterInstances">
+       <con:item name="HTMLFormPD">com.pingidentity.adapters.htmlform.idp.HtmlFormIdpAuthnAdapter</con:item>
+       <con:item name="idpadapter">com.pingidentity.pf.adapters.referenceid.IdpBackchannelReferenceAuthnAdapter</con:item>
+   </con:map>
+   <con:map name="IdpAdapterInstanceParents"/>
+   <con:map name="SpAuthnAdapterInstances">
+       <con:item name="spadapter">com.pingidentity.pf.adapters.referenceid.SpBackchannelReferenceAuthnAdapter</con:item>
+   </con:map>
 </con:config>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<md:EntityDescriptor entityID="PF-DEMO" urn:name="Sample IdP" ID="JzQLSxctDZSr6ge8.OCPftFBsOz" urn:baseUrl="https://localhost:9031" urn:LogLevel="STANDARD" urn:isActive="true" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:urn="urn:sourceid.org:saml2:metadata-extension:v2">
+    <md:Extensions>
+        <urn:EntityExtension PFVersion="9.2.1.0-SNAPSHOT" LicenseGroup="">
+            <urn:DigitialSignatureAliases SigningKeyAlias="g5buwpmmydmhmodmrslutgtle" includeX509inXmlSig="false" includeRawKeyInXmlSig="false" SigningAlgorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256">
+                <urn:ActiveVerificationCertAlias>s3izeafjatpqwnvyexyb0u1na</urn:ActiveVerificationCertAlias>
+            </urn:DigitialSignatureAliases>
+            <urn:Encryption>
+                <urn:EncryptionPolicy EncryptionAlgorithm="http://www.w3.org/2001/04/xmlenc#aes128-cbc" KeyTransportAlgorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p" EncryptAssertion="false" EncryptSubjectNameID="false" SLOEncryptSubjectNameID="false"/>
+                <urn:DecryptionPolicy AssertionEncrypted="false" SubjectNameIDEncrypted="false" AttributeEncrypted="false" SLOSubjectNameIDEncrypted="false"/>
+            </urn:Encryption>
+            <urn:ConnectionTemplateProperties/>
+            <urn:MetadataUrlId xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <urn:enableAutoMetadataUpdate>false</urn:enableAutoMetadataUpdate>
+            <urn:AdditionalAllowedEntitiesConfiguration>
+                <urn:AllowAdditionalEntities>false</urn:AllowAdditionalEntities>
+                <urn:AllowAllEntities>false</urn:AllowAllEntities>
+                <urn:AdditionalAllowedEntities/>
+            </urn:AdditionalAllowedEntitiesConfiguration>
+        </urn:EntityExtension>
+    </md:Extensions>
+    <md:IDPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol" WantAuthnRequestsSigned="false">
+        <md:Extensions>
+            <urn:RoleExtension ArtifactTimeoutSeconds="60" LastModified="2019-01-23T11:29:52.322-08:00">
+                <urn:IncomingBindings Artifact="false" POST="true" Redirect="false" SOAP="false"/>
+                <urn:EnabledProfiles IDPInitiatedSSO="true" IDPInitiatedSLO="true" SPInitiatedSSO="true" SPInitiatedSLO="true"/>
+                <urn:IDP AssertionsSigned="false" DefaultTargetResource="https://localhost:9031/AgentlessSPSample/app">
+                    <urn:TargetAttributeMapping AdapterInstanceId="spadapter" RestrictVirtualServerIds="false">
+                        <urn:AttributeMap Name="firstName" Type="Assertion" Value="firstName"/>
+                        <urn:AttributeMap Name="lastName" Type="Assertion" Value="lastName"/>
+                        <urn:AttributeMap Name="subject" Type="Assertion" Value="SAML_SUBJECT"/>
+                        <urn:AttributeMap Name="groups" Type="Assertion" Value="groups"/>
+                        <urn:AttributeMap Name="status" Type="Assertion" Value="status"/>
+                        <urn:TokenAuthorizationIssuanceCriteria/>
+                    </urn:TargetAttributeMapping>
+                    <urn:AccountLinkingAndMapping Type="mapping" IncludeAdditionalAttributes="false"/>
+                    <urn:ErrPageMsg>errorDetail.spSsoFailure</urn:ErrPageMsg>
+                </urn:IDP>
+            </urn:RoleExtension>
+        </md:Extensions>
+        <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://localhost:9031/idp/SLO.saml2"/>
+        <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://localhost:9031/idp/SLO.saml2"/>
+        <md:SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="/idp/SSO.saml2"/>
+        <saml:Attribute Name="firstName" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"/>
+        <saml:Attribute Name="lastName" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"/>
+        <saml:Attribute Name="name" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"/>
+        <saml:Attribute Name="groups" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"/>
+        <saml:Attribute Name="status" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic" xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion"/>
+    </md:IDPSSODescriptor>
+    <md:RoleDescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol" xsi:type="urn:PFAvailableCertsRoleDescriptorType" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <urn:availableCert>
+            <urn:Base64EncodedCert>MIICXTCCAcagAwIBAgIGATDbjCWrMA0GCSqGSIb3DQEBBQUAMHExCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDTzEPMA0GA1UEBxMGRGVudmVyMRUwEwYDVQQKEwxQaW5nRmVkZXJhdGUxFTATBgNVBAsTDFBpbmdJZGVudGl0eTEWMBQGA1UEAxMNZGVtbyBkc2lnIG5ldzAgFw0xMTA2MjkxMzE3MzJaGA8yMTExMDYwNTEzMTczMlowcTELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNPMQ8wDQYDVQQHEwZEZW52ZXIxFTATBgNVBAoTDFBpbmdGZWRlcmF0ZTEVMBMGA1UECxMMUGluZ0lkZW50aXR5MRYwFAYDVQQDEw1kZW1vIGRzaWcgbmV3MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6foDB+shyY0XG2HqMMpFbRUH+bmivje2I0Zb3DtLNVJo5WksW6BnQ4e5bFLb1Q69+knrVLGaEi/+FE1dhLez4fEFIFrFb8vqDpMvv5FRhQ6YZ2MWy7Y8Ep/juCN0GezuFhILdTbf2DDx07Fq1rvxZhtU7UjyUxvzELGPQPu+9BQIDAQABMA0GCSqGSIb3DQEBBQUAA4GBACrjAN5EM6+e4XSvpSZOWGypcgKLLrEnt7nVYcwB/koFPfGlHKJL6Ec345DDwxrCzUEKpQXYsiNL0+occGEsp+a4NPu5rib/jb/bRErbRIkfuIzDZHuqwyF5CrGzL0sEVQuS44fHeL7Fy3Hfx9YTgFNUMdg+ACCoriS5kcc+K71c</urn:Base64EncodedCert>
+            <urn:alias>s3izeafjatpqwnvyexyb0u1na</urn:alias>
+        </urn:availableCert>
+    </md:RoleDescriptor>
+    <md:ContactPerson contactType="administrative"/>
+</md:EntityDescriptor>

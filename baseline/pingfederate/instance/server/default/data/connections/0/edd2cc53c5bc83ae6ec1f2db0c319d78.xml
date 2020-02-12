@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<md:EntityDescriptor entityID="PF-DEMO" urn:name="Sample SP" ID="Nu_nhD-hzEs8Hb6pvkfhTmdytJD" urn:LogLevel="STANDARD" urn:isActive="true" xmlns:md="urn:oasis:names:tc:SAML:2.0:metadata" xmlns:urn="urn:sourceid.org:saml2:metadata-extension:v2">
+    <md:Extensions>
+        <urn:EntityExtension PFVersion="9.2.1.0-SNAPSHOT" LicenseGroup="">
+            <urn:DigitialSignatureAliases SigningKeyAlias="g5buwpmmydmhmodmrslutgtle" includeX509inXmlSig="false" includeRawKeyInXmlSig="false" SigningAlgorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1">
+                <urn:ActiveVerificationCertAlias>ln95q27eun1lc74ss8kzfeecv</urn:ActiveVerificationCertAlias>
+            </urn:DigitialSignatureAliases>
+            <urn:Encryption>
+                <urn:EncryptionPolicy EncryptionAlgorithm="http://www.w3.org/2001/04/xmlenc#aes128-cbc" KeyTransportAlgorithm="http://www.w3.org/2001/04/xmlenc#rsa-oaep-mgf1p" EncryptAssertion="false" EncryptSubjectNameID="false" SLOEncryptSubjectNameID="false"/>
+                <urn:DecryptionPolicy AssertionEncrypted="false" SubjectNameIDEncrypted="false" AttributeEncrypted="false" SLOSubjectNameIDEncrypted="false"/>
+            </urn:Encryption>
+            <urn:ConnectionTemplateProperties/>
+            <urn:MetadataUrlId xsi:nil="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"/>
+            <urn:enableAutoMetadataUpdate>false</urn:enableAutoMetadataUpdate>
+            <urn:AdditionalAllowedEntitiesConfiguration>
+                <urn:AllowAdditionalEntities>false</urn:AllowAdditionalEntities>
+                <urn:AllowAllEntities>false</urn:AllowAllEntities>
+                <urn:AdditionalAllowedEntities/>
+            </urn:AdditionalAllowedEntitiesConfiguration>
+        </urn:EntityExtension>
+    </md:Extensions>
+    <md:SPSSODescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol" AuthnRequestsSigned="false" WantAssertionsSigned="false" SignResponseAsRequired="true">
+        <md:Extensions>
+            <urn:RoleExtension ArtifactTimeoutSeconds="60" LastModified="2019-01-23T11:27:21.080-08:00">
+                <urn:IncomingBindings Artifact="false" POST="true" Redirect="true" SOAP="false"/>
+                <urn:EnabledProfiles IDPInitiatedSSO="true" IDPInitiatedSLO="true" SPInitiatedSSO="true" SPInitiatedSLO="true"/>
+                <urn:SP AssertionValidityAfterMinutes="5" AssertionValidityBeforeMinutes="5" ConnectionTargetType="Standard" EnableCDCDuringSSO="false">
+                    <urn:AdapterToAssertionMapping AbortIfNotFoundInAnyDataSources="false" RestrictVirtualServerIds="false" AdapterInstanceId="idpadapter">
+                        <urn:DefaultAttributeMapping>
+                            <urn:AttributeMap Name="firstName" Type="Adapter" Value="firstName"/>
+                            <urn:AttributeMap Name="lastName" Type="Adapter" Value="lastName"/>
+                            <urn:AttributeMap Name="groups" Type="Adapter" Value="groups"/>
+                            <urn:AttributeMap Name="SAML_SUBJECT" Type="Adapter" Value="subject"/>
+                            <urn:AttributeMap Name="status" Type="Adapter" Value="status"/>
+                            <urn:TokenAuthorizationIssuanceCriteria/>
+                        </urn:DefaultAttributeMapping>
+                    </urn:AdapterToAssertionMapping>
+                    <urn:NameIdentifierMappingType IncludeAdditionalAttributes="false" IncludeAdditionalTransientAttributes="false"/>
+                </urn:SP>
+            </urn:RoleExtension>
+        </md:Extensions>
+        <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://localhost:9031/sp/SLO.saml2"/>
+        <md:SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://localhost:9031/idp/SLO.saml2"/>
+        <md:NameIDFormat>urn:oasis:names:tc:SAML:1.1:nameid-format:unspecified</md:NameIDFormat>
+        <md:AssertionConsumerService index="0" Location="https://localhost:9031/sp/ACS.saml2" Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" isDefault="true"/>
+        <md:AttributeConsumingService index="0">
+            <md:ServiceName xml:lang="en">AttributeContract</md:ServiceName>
+            <md:RequestedAttribute Name="firstName" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified"/>
+            <md:RequestedAttribute Name="lastName" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:unspecified"/>
+            <md:RequestedAttribute Name="groups" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+            <md:RequestedAttribute Name="status" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:basic"/>
+        </md:AttributeConsumingService>
+    </md:SPSSODescriptor>
+    <md:RoleDescriptor protocolSupportEnumeration="urn:oasis:names:tc:SAML:2.0:protocol" xsi:type="urn:PFAvailableCertsRoleDescriptorType" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+        <urn:availableCert>
+            <urn:Base64EncodedCert>MIICXTCCAcagAwIBAgIGATDbjCWrMA0GCSqGSIb3DQEBBQUAMHExCzAJBgNVBAYTAlVTMQswCQYDVQQIEwJDTzEPMA0GA1UEBxMGRGVudmVyMRUwEwYDVQQKEwxQaW5nRmVkZXJhdGUxFTATBgNVBAsTDFBpbmdJZGVudGl0eTEWMBQGA1UEAxMNZGVtbyBkc2lnIG5ldzAgFw0xMTA2MjkxMzE3MzJaGA8yMTExMDYwNTEzMTczMlowcTELMAkGA1UEBhMCVVMxCzAJBgNVBAgTAkNPMQ8wDQYDVQQHEwZEZW52ZXIxFTATBgNVBAoTDFBpbmdGZWRlcmF0ZTEVMBMGA1UECxMMUGluZ0lkZW50aXR5MRYwFAYDVQQDEw1kZW1vIGRzaWcgbmV3MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC6foDB+shyY0XG2HqMMpFbRUH+bmivje2I0Zb3DtLNVJo5WksW6BnQ4e5bFLb1Q69+knrVLGaEi/+FE1dhLez4fEFIFrFb8vqDpMvv5FRhQ6YZ2MWy7Y8Ep/juCN0GezuFhILdTbf2DDx07Fq1rvxZhtU7UjyUxvzELGPQPu+9BQIDAQABMA0GCSqGSIb3DQEBBQUAA4GBACrjAN5EM6+e4XSvpSZOWGypcgKLLrEnt7nVYcwB/koFPfGlHKJL6Ec345DDwxrCzUEKpQXYsiNL0+occGEsp+a4NPu5rib/jb/bRErbRIkfuIzDZHuqwyF5CrGzL0sEVQuS44fHeL7Fy3Hfx9YTgFNUMdg+ACCoriS5kcc+K71c</urn:Base64EncodedCert>
+            <urn:alias>ln95q27eun1lc74ss8kzfeecv</urn:alias>
+        </urn:availableCert>
+    </md:RoleDescriptor>
+    <md:ContactPerson contactType="administrative"/>
+</md:EntityDescriptor>
